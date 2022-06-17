@@ -55,3 +55,28 @@ for(let i = 0; i < team.length; i++){
     const containerDom = document.querySelector('.team-container');
     containerDom.innerHTML += teammate;
 }
+
+
+// Utilizzare gli input presenti nella pagina per permettere all'utente 
+// di aggiungere nuovi membri del team: 
+// cliccando sul pulsante "add" viene creato un nuovo oggetto, 
+// il quale viene inserito nell'array iniziale e viene stampata una nuova card 
+// con tutte le informazioni inserite dall'utente.
+
+const addMemberButton = document.getElementById('addMemberButton')
+addMemberButton.addEventListener('click', 
+    function(){
+        const newName = document.getElementById('name').value;
+        const newRole = document.getElementById('role').value;
+        const newImage = document.getElementById('image').value;
+
+        const newMember = [
+            {
+                name: newName,
+                role: newRole,
+                image: newImage
+            }
+        ];
+    }
+);
+
