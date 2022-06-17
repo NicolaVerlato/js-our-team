@@ -66,17 +66,45 @@ for(let i = 0; i < team.length; i++){
 const addMemberButton = document.getElementById('addMemberButton')
 addMemberButton.addEventListener('click', 
     function(){
+        // prendo il valore degli elementi nel form
         const newName = document.getElementById('name').value;
         const newRole = document.getElementById('role').value;
         const newImage = document.getElementById('image').value;
 
-        const newMember = [
-            {
-                name: newName,
-                role: newRole,
-                image: newImage
-            }
-        ];
+        // li metto in un nuovo oggetto
+        const newMember = {
+            name: newName,
+            role: newRole,
+            image: newImage
+        }
+
+        addMember();
+
+        function addMember(){
+            // pusho il nuovo elemento dentro l'array team
+            team.push(newMember);
+            console.log(team)
+
+            // prendo il nuovo membro del team
+            const newTeammate = `
+            <div class="team-card">
+                <div class="card-image">
+                    <img
+                    src="${newMember.image}"
+                    alt="Wayne Barnett"
+                    />
+                </div>
+                <div class="card-text">
+                    <h3>${newMember.name}</h3>
+                    <p>${newMember.role}</p>
+                </div>
+                </div>
+            `;
+
+            // lo appendo al container
+            const containerDom = document.querySelector('.team-container');
+            containerDom.innerHTML += newTeammate;
+        }
     }
 );
 
