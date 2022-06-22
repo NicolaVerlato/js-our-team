@@ -2,32 +2,32 @@ const team = [
     {
         name: 'Wayne Barnett',
         role:  'Founder & CEO',
-        image: 'img/wayne-barnett-founder-ceo.jpg'
+        image: 'wayne-barnett-founder-ceo.jpg'
     },
     {
         name: 'Angela Caroll',
         role:  'Chief Editor',
-        image:  'img/angela-caroll-chief-editor.jpg'
+        image:  'angela-caroll-chief-editor.jpg'
     },
     {
         name: 'Walter Gordon',
         role:  'Office Manager',
-        image: 'img/walter-gordon-office-manager.jpg'
+        image: 'walter-gordon-office-manager.jpg'
     },
     {
         name: 'Angela Lopez',
         role:  'Social Media Manager',
-        image: 'img/angela-lopez-social-media-manager.jpg'
+        image: 'angela-lopez-social-media-manager.jpg'
     },
     {
         name: 'Scott Estrada',
         role:  'Developer',
-        image: 'img/scott-estrada-developer.jpg'
+        image: 'scott-estrada-developer.jpg'
     },
     {
         name: 'Barbara Ramos',
         role:  'Graphic Designer',
-        image: 'img/barbara-ramos-graphic-designer.jpg'
+        image: 'barbara-ramos-graphic-designer.jpg'
     }
 ];
 
@@ -35,18 +35,48 @@ const team = [
 for(let i = 0; i < team.length; i++){
     thisTeammate = team[i];
 
+    // ogni membro lo appendo nel dom
+    teammate(thisTeammate);
+}
+
+const addMemberButton = document.getElementById('addMemberButton')
+addMemberButton.addEventListener('click', 
+    function(){
+
+        // prendo il valore degli elementi nel form
+        let newName = document.getElementById('name').value;
+        let newRole = document.getElementById('role').value;
+        let newImage = document.getElementById('image').value;
+    
+        // li metto in un nuovo oggetto
+        const newMember = {
+            name: newName,
+            role: newRole,
+            image: newImage
+        };
+        
+        addMember(newMember);
+
+    }
+);
+
+// --------------
+// FUNZIONI
+// --------------
+// funzione per appendere al dom ogni membro del team
+function teammate(teamMember){
     // ogni elemento lo prendo dal sample nel dom
     const teammate = `
     <div class="team-card">
         <div class="card-image">
             <img
-            src="${thisTeammate.image}"
-            alt="Wayne Barnett"
+            src="img/${teamMember.image}"
+            alt="${teamMember.name}"
             />
         </div>
         <div class="card-text">
-            <h3>${thisTeammate.name}</h3>
-            <p>${thisTeammate.role}</p>
+            <h3>${teamMember.name}</h3>
+            <p>${teamMember.role}</p>
         </div>
         </div>
     `;
@@ -56,55 +86,12 @@ for(let i = 0; i < team.length; i++){
     containerDom.innerHTML += teammate;
 }
 
+// funzione per appendere al dom un nuovo membro del team
+function addMember(member){
+    // pusho il nuovo elemento dentro l'array team
+    team.push(member);
 
-// Utilizzare gli input presenti nella pagina per permettere all'utente 
-// di aggiungere nuovi membri del team: 
-// cliccando sul pulsante "add" viene creato un nuovo oggetto, 
-// il quale viene inserito nell'array iniziale e viene stampata una nuova card 
-// con tutte le informazioni inserite dall'utente.
+    teammate(member);
+}
 
-const addMemberButton = document.getElementById('addMemberButton')
-addMemberButton.addEventListener('click', 
-    function(){
-        // prendo il valore degli elementi nel form
-        const newName = document.getElementById('name').value;
-        const newRole = document.getElementById('role').value;
-        const newImage = document.getElementById('image').value;
-
-        // li metto in un nuovo oggetto
-        const newMember = {
-            name: newName,
-            role: newRole,
-            image: newImage
-        }
-
-        addMember();
-
-        function addMember(){
-            // pusho il nuovo elemento dentro l'array team
-            team.push(newMember);
-            console.log(team)
-
-            // prendo il nuovo membro del team
-            const newTeammate = `
-            <div class="team-card">
-                <div class="card-image">
-                    <img
-                    src="${newMember.image}"
-                    alt="Wayne Barnett"
-                    />
-                </div>
-                <div class="card-text">
-                    <h3>${newMember.name}</h3>
-                    <p>${newMember.role}</p>
-                </div>
-                </div>
-            `;
-
-            // lo appendo al container
-            const containerDom = document.querySelector('.team-container');
-            containerDom.innerHTML += newTeammate;
-        }
-    }
-);
 
